@@ -1,0 +1,14 @@
+= form_with(model: task, data: { controller: "form", action: 'turbo:submit-end->form#resetForm' }, id: "#{dom_id(task)}_form") do |form|
+  - if task.errors.any?
+       #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3.mb-5
+        h2
+               = pluralize(task.errors.count, "error")
+               |  prohibited this task from being saved:
+        ul
+                - task.errors.each do |error|
+                  li
+                    = error.full_message
+  .w-full.flex
+    = form.text_field :name, class: "block w-full rounded-full mr-2 sm:text-sm border-gray-300 ", placeholder: "Add a new task..."
+    = form.submit class: "-ml-px relative px-4 py-2 border border-blue-600 text-sm font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700"
+
